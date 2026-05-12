@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket ! — P2P File Transfer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Rocket !</h1>
+            <p class="subtitle">P2P File Transfer</p>
+            <div class="badges">
+                <span class="badge">⚡ DIRECT</span>
+                <span class="badge">📲 P2P</span>
+                <span class="badge">🌐 NO SERVER</span>
+                <span class="badge">🔐 ENCRYPTED</span>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab active" onclick="switchTab('send')">📤 SEND</button>
+            <button class="tab" onclick="switchTab('receive')">📥 RECEIVE</button>
+        </nav>
+
+        <!-- SEND SECTION -->
+        <section id="sendSection" class="section active">
+            <div id="sendStep1">
+                <div class="upload-area" id="dropZone">
+                    <input type="file" id="fileInput" hidden>
+                    <div class="upload-icon">📂</div>
+                    <h3>Click or drop files here. All types supported.</h3>
+                    <p>คลิกหรือลากไฟล์มาวางที่นี่ รองรับไฟล์ทุกประเภท</p>
+                </div>
+                <div id="fileInfo" class="file-info" style="display:none;">
+                    <div class="file-icon">📄</div>
+                    <div class="file-details">
+                        <div class="file-name" id="fileName"></div>
+                        <div class="file-size" id="fileSize"></div>
+                    </div>
+                    <button class="btn-remove" onclick="removeFile()">✕</button>
+                </div>
+                <button id="generateBtn" class="btn-primary" onclick="generateCode()" disabled>
+                    Generate Transfer Code
+                </button>
+            </div>
+
+            <div id="sendStep2" style="display:none;">
+                <div class="code-display">
+                    <h3>Scan QR code or enter code</h3>
+                    <div id="qrcode"></div>
+                    <div class="code-box">
+                        <span id="peerCode" class="code-text"></span>
+                        <button class="btn-copy" onclick="copyCode()"> COPY</button>
+                    </div>
+                    <button class="btn-secondary" onclick="copyLink()">🔗 COPY LINK</button>
+                </div>
+                <div class="status" id="sendStatus">
+                    <div class="status-dot"></div>
+                    <span>Connecting to peer server...</span>
+                </div>
+                <div class="progress-container" id="sendProgressContainer" style="display:none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="sendProgress"></div>
+                    </div>
+                    <div class="progress-text" id="sendProgressText">0%</div>
+                </div>
+            </div>
+
+            <div id="sendStep3" style="display:none;">
+                <div class="success-message">
+                    <div class="success-icon">✅</div>
+                    <h3>File sent successfully!</h3>
+                    <p>Your file was sent peer-to-peer via WebRTC</p>
+                </div>
+                <button class="btn-primary" onclick="resetSend()">Send another file</button>
+            </div>
+        </section>
+
+        <!-- RECEIVE SECTION -->
+        <section id="receiveSection" class="section">
+            <div id="receiveStep1">
+                <h3>Enter 6-digit code from sender</h3>
+                <input type="text" id="receiverCode" class="code-input" 
+                       placeholder="XXXXXX" maxlength="6" pattern="[A-Za-z0-9]{6}">
+                <button class="btn-primary" onclick="connectToSender()">
+                    🔗 Connect & Receive File
+                </button>
+            </div>
+
+            <div id="receiveStep2" style="display:none;">
+                <div class="status">
+                    <div class="status-dot loading"></div>
+                    <span id="receiveStatusText">Connecting...</span>
+                </div>
+                <div class="progress-container" id="receiveProgressContainer" style="display:none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="receiveProgress"></div>
+                    </div>
+                    <div class="progress-text" id="receiveProgressText">0%</div>
+                </div>
+            </div>
+
+            <div id="receiveStep3" style="display:none;">
+                <div class="success-message">
+                    <div class="success-icon">🎉</div>
+                    <h3>File received!</h3>
+                    <p id="receivedFileName"></p>
+                    <p>Downloading automatically...</p>
+                </div>
+                <button class="btn-primary" onclick="resetReceive()">Receive another file</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>🚀 ไฟล์ถูกส่งตรง peer-to-peer โดยไม่ผ่าน server กลาง และมีการเข้ารหัสความปลอดภัย</p>
+            <p class="credit">Inspired by Beam P2P 🤖 Coded by Qwen3.6-Plus</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
