@@ -1,7 +1,7 @@
 // 🌐 i18n Configuration
 const i18n = {
     th: {
-        pageTitle: "Rocket ! — P2P File Transfer", headerTitle: "🚀 Rocket !", headerSubtitle: "รับ-ส่งไฟล์แบบ Peer-to-Peer",
+        pageTitle: "Rocket! — P2P File Transfer", headerTitle: "🚀 Rocket!", headerSubtitle: "รับ-ส่งไฟล์แบบ Peer-to-Peer",
         badgeDirect: "⚡ ตรง", badgeP2P: "📲 P2P", badgeNoServer: "🌐 ไม่ผ่านเซิร์ฟเวอร์", badgeEncrypted: "🔐 เข้ารหัส",
         tabSend: "📤 ส่งไฟล์", tabReceive: "📥 รับไฟล์", dropzoneText: "คลิกหรือลากไฟล์มาวางที่นี่ รองรับไฟล์ทุกประเภท",
         generateBtn: "สร้างรหัสรับ-ส่งไฟล์", scanOrEnter: "สแกน QR Code หรือป้อนรหัส", copyCode: "คัดลอก", copyLink: "🔗 คัดลอกลิงก์",
@@ -13,12 +13,12 @@ const i18n = {
         fileReceived: "รับไฟล์สำเร็จ!", downloading: "กำลังดาวน์โหลดอัตโนมัติ...", receiveAnother: "รับไฟล์อื่น",
         footerDesc: "🚀 ไฟล์ถูกส่งตรง peer-to-peer โดยไม่ผ่าน server กลาง และมีการเข้ารหัสความปลอดภัย",
         modalTitle: "มีผู้ขอรับไฟล์", modalPeerIdLabel: "PEER ID", modalFileLabel: "ไฟล์", modalReject: "✕ ปฏิเสธ", modalAccept: "✓ ส่งไฟล์",
-        toastCopiedCode: "คัดลอก Code แล้ว: ", toastCopiedLink: "คัดลอก Link แล้วสำเร็จ!", toastCodeLength: "กรุณาใส่ code 8 ตัวอักษร",
+        toastCopiedCode: "คัดลอก Code แล้ว: ", toastCopiedLink: "คัดลอกลิงก์สำเร็จ!", toastCodeLength: "กรุณาใส่ code 8 ตัวอักษร",
         errLargeFile: "ไฟล์ใหญ่เกินไปสำหรับ browser (ขีดจำกัด 2GB)", errMemory: "ไฟล์ใหญ่เกินไปสำหรับ RAM ของ browser",
-        langBtn: "EN/TH"
+        langBtnTH: "🇹🇭 ไทย", langBtnEN: "🇬🇧 English"
     },
     en: {
-        pageTitle: "Rocket ! — P2P File Transfer", headerTitle: "🚀 Rocket !", headerSubtitle: "Secure P2P File Transfer",
+        pageTitle: "Rocket! — P2P File Transfer", headerTitle: "🚀 Rocket!", headerSubtitle: "Secure P2P File Transfer",
         badgeDirect: "⚡ DIRECT", badgeP2P: "📲 P2P", badgeNoServer: "🌐 NO SERVER", badgeEncrypted: "🔐 ENCRYPTED",
         tabSend: "📤 SEND", tabReceive: "📥 RECEIVE", dropzoneText: "Click or drop files here. All types supported.",
         generateBtn: "Generate Transfer Code", scanOrEnter: "Scan QR code or enter code", copyCode: "COPY", copyLink: "🔗 COPY LINK",
@@ -32,7 +32,7 @@ const i18n = {
         modalTitle: "Incoming File Request", modalPeerIdLabel: "PEER ID", modalFileLabel: "FILE", modalReject: "✕ Reject", modalAccept: "✓ Send",
         toastCopiedCode: "Code copied: ", toastCopiedLink: "Link copied successfully!", toastCodeLength: "Please enter an 8-character code",
         errLargeFile: "File too large for browser (limit 2GB)", errMemory: "File too large for browser RAM",
-        langBtn: "TH/EN"
+        langBtnTH: "🇹🇭 Thai", langBtnEN: "🇬🇧 EN"
     }
 };
 
@@ -43,6 +43,8 @@ function setLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('lang', lang);
     document.documentElement.lang = lang;
+    
+    // อัปเดตข้อความทั้งหมด
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18n[lang][key]) el.textContent = i18n[lang][key];
@@ -51,20 +53,19 @@ function setLanguage(lang) {
         const key = el.getAttribute('data-i18n-placeholder');
         if (i18n[lang][key]) el.placeholder = i18n[lang][key];
     });
+    
+    // ✅ อัปเดตปุ่มสลับภาษาให้แสดง "ภาษาปลายทาง" เสมอ
     const btn = document.getElementById('langToggle');
-    if (btn) btn.textContent = i18n[lang].langBtn;
+    if (btn) btn.textContent = lang === 'th' ? i18n[lang].langBtnEN : i18n[lang].langBtnTH;
 }
 
 // 💾 File Size Limit
 const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024;
-
-// Global variables
-let peer = null;
-let conn = null;
-let currentFile = null;
-let peerCode = null;
-let codeCreatedAt = null;
+let peer = null, conn = null, currentFile = null, peerCode = null, codeCreatedAt = null;
 const CODE_EXPIRY_MS = 5 * 60 * 1000;
+let countdownInterval = null, receiverTimerInterval = null;
+let receivedBuffer = null, receivedBytes = 0, receivedMetadata = null;
+let _modalResolve = null;
 
 // ─── Crypto RNG ──────────────────────────────────────────────────────────────
 function generateSecureCode(length = 8) {
@@ -108,8 +109,7 @@ function setupDragDrop() {
     dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
     dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
+        e.preventDefault(); dropZone.classList.remove('dragover');
         if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
     });
 }
@@ -148,7 +148,6 @@ function generateCode() {
 }
 
 // ─── Expiry countdown (Sender) ────────────────────────────────────────────────
-let countdownInterval = null;
 function startExpiryCountdown() {
     clearInterval(countdownInterval);
     const timerEl = document.getElementById('expiryCountdown');
@@ -169,7 +168,6 @@ function startExpiryCountdown() {
 }
 
 // ─── Custom modal ─────────────────────────────────────────────────────────────
-let _modalResolve = null;
 function showConfirmModal(peerId, fileName) {
     return new Promise(resolve => {
         _modalResolve = resolve;
@@ -235,7 +233,7 @@ function sendFile() {
         const chunk = currentFile.slice(offset, offset + chunkSize);
         const reader = new FileReader();
         reader.onload = (e) => {
-            conn.send({ type: 'chunk', data: e.target.result, offset, total: currentFile.size });
+            conn.send({ type: 'chunk',  e.target.result, offset, total: currentFile.size });
             offset = Math.min(offset + chunkSize, currentFile.size);
             updateSendProgress(Math.min(100, Math.round((offset / currentFile.size) * 100)));
             readNextChunk();
@@ -267,11 +265,10 @@ function updateSendProgress(progress) {
 function copyCode() { navigator.clipboard.writeText(peerCode).then(() => showToast(t('toastCopiedCode') + peerCode)); }
 
 function copyLink() {
-    const code = document.getElementById('peerCode').textContent;
-    if (code === 'XXXXXXXX') return;
+    if (!peerCode || peerCode === 'XXXXXXXX') return;
     const exp = Date.now() + CODE_EXPIRY_MS;
     const url = new URL(window.location.href);
-    url.searchParams.set('code', code);
+    url.searchParams.set('code', peerCode);
     url.searchParams.set('exp', exp);
     navigator.clipboard.writeText(url.toString()).then(() => showToast(t('toastCopiedLink')));
 }
@@ -299,7 +296,6 @@ function resetSend() {
 // ═══════════════════════════════════════════════════════════════════════════════
 // RECEIVER
 // ═══════════════════════════════════════════════════════════════════════════════
-let receiverTimerInterval = null;
 function connectToSender() {
     const code = document.getElementById('receiverCode').value.toUpperCase().trim();
     if (code.length !== 8) { showToast(t('toastCodeLength')); return; }
@@ -318,7 +314,6 @@ function startReceiverCountdown(expiryTimestamp) {
     clearInterval(receiverTimerInterval);
     const expiryEl = document.getElementById('receiverExpiry');
     if (!expiryEl) return;
-    
     receiverTimerInterval = setInterval(() => {
         const diff = expiryTimestamp - Date.now();
         if (diff <= 0) {
@@ -336,14 +331,13 @@ function startReceiverCountdown(expiryTimestamp) {
 function connectToPeer(senderCode) {
     try {
         conn = peer.connect(senderCode, { reliable: true });
+        // ✅ แก้ไข: เมื่อเชื่อมต่อสำเร็จ ให้เปลี่ยนข้อความทันที และหยุดนับถอยหลัง
         conn.on('open', () => {
             console.log('Connected to sender:', senderCode);
-            // ✅ แก้: แสดงสถานะเมื่อเชื่อมต่อสำเร็จแล้ว
             document.getElementById('receiveStatusText').textContent = t('statusConnected') || 'เชื่อมต่อสำเร็จ! กำลังรับไฟล์...';
-            // ✅ หยุดนับถอยหลังเมื่อเริ่มรับไฟล์ได้จริง (ป้องกันทับ UI)
+            document.getElementById('receiverExpiry').textContent = ''; // ลบ countdown ทิ้งเมื่อเชื่อมต่อแล้ว
             clearInterval(receiverTimerInterval);
         });
-
         conn.on('data', (data) => handleReceivedData(data));
         conn.on('close', () => console.log('Connection closed'));
         conn.on('error', (err) => {
@@ -357,24 +351,22 @@ function connectToPeer(senderCode) {
 }
 
 // ─── Receive: Pre-allocated buffer ────────────────────────────────────────────
-let receivedBuffer = null, receivedBytes = 0, receivedMetadata = null;
-
 function handleReceivedData(data) {
     if (data.type === 'metadata') {
         if (data.size > MAX_FILE_SIZE) { showToast(t('errLargeFile')); conn.close(); return; }
         receivedMetadata = data; receivedBytes = 0;
         try { receivedBuffer = new Uint8Array(data.size); }
         catch (e) { showToast(t('errMemory')); conn.close(); return; }
-        
+
+        console.log('Receiving file:', data.name, formatFileSize(data.size));
         // ✅ อัปเดต UI เมื่อผู้ส่งเริ่มส่งข้อมูลจริง
         document.getElementById('receiveStatusText').textContent = t('downloading') || 'กำลังดาวน์โหลดไฟล์...';
         document.getElementById('receiveProgressContainer').style.display = 'block';
-        
+
     } else if (data.type === 'chunk') {
         if (!receivedBuffer || !receivedMetadata) return;
         receivedBuffer.set(new Uint8Array(data.data), data.offset);
         receivedBytes += data.data.byteLength;
-        
         const progress = Math.min(100, Math.round((receivedBytes / receivedMetadata.size) * 100));
         document.getElementById('receiveProgress').style.width = progress + '%';
         document.getElementById('receiveProgressText').textContent = progress + '%';
