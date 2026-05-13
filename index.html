@@ -6,7 +6,7 @@
     <meta name="description" content="Secure P2P File Transfer via WebRTC. No server required, end-to-end encrypted.">
     <meta name="theme-color" content="#667eea">
     <title data-i18n="pageTitle">Rocket ! — P2P File Transfer</title>
-    <!-- Favicon รูปจรวด (SVG Data URI) -->
+    <!-- Favicon รูปจรวด -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -55,7 +55,7 @@
                     <h3 data-i18n="scanOrEnter">สแกน QR Code หรือป้อนรหัส</h3>
                     <div id="qrcode"></div>
                     <div class="code-box">
-                        <div class="code-text" id="peerCode"></div>
+                        <div class="code-text" id="peerCode">XXXXXXXX</div>
                         <button class="btn-copy" onclick="copyCode()" data-i18n="copyCode">คัดลอก</button>
                         <button class="btn-copy" onclick="copyLink()" data-i18n="copyLink">🔗 คัดลอกลิงก์</button>
                     </div>
@@ -87,7 +87,7 @@
         <div id="receiveSection" class="section">
             <div id="receiveStep1">
                 <input type="text" id="receiverCode" class="code-input" placeholder="XXXXXXXX" maxlength="8" data-i18n-placeholder="enterCode">
-                <button class="btn-primary" onclick="connectToSender()" data-i18n="connectBtn">🔗 เชื่อมต่อและรับไฟล์</button>
+                <button id="connectBtn" class="btn-primary" onclick="connectToSender()" data-i18n="connectBtn">🔗 เชื่อมต่อและรับไฟล์</button>
             </div>
 
             <div id="receiveStep2" style="display:none;">
@@ -95,6 +95,7 @@
                     <div class="status-dot"></div>
                     <span id="receiveStatusText" data-i18n="statusConnectingReceive">กำลังเชื่อมต่อ...</span>
                 </div>
+                <div id="receiverExpiry" class="expiry-timer"></div>
                 <div id="receiveProgressContainer" style="display:none;">
                     <div class="progress-bar"><div id="receiveProgress" class="progress-fill"></div></div>
                     <div id="receiveProgressText" class="progress-text">0%</div>
