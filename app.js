@@ -110,6 +110,65 @@ function setLanguage(lang) {
     if (btn) btn.textContent = i18n[lang].langBtn;
 }
 
+// 1. ปรับปรุงฟังก์ชันสร้างลิงก์ให้แนบ Timestamp
+function copyLink() {
+    const code = document.getElementById('displayCode').textContent;
+    if (code === 'XXXXXXXX') return;
+
+    // คำนวณเวลาหมดอายุ (5 นาทีจากตอนนี้)
+    const expiryTimestamp = Date.now() + (5 * 60 * 1000);
+    
+    const url = new URL(window.location.href);
+    url.searchParams.set('code', code);
+    url.searchParams.set('exp', expiryTimestamp); // แนบเวลาหมดอายุไปกับลิงก์
+
+    navigator.clipboard.writeText(url.toString()).then(() => {
+        showToast(t('copyLink') + ' สำเร็จ!');
+    });
+}
+
+// 2. เพิ่มฟังก์ชันนับถอยหลังสำหรับฝั่งผู้รับ
+let receiverTimerInterval;
+function startReceiverCountdown(expiryTimestamp) {
+    const statusText = document.getElementById('receiveStatusText');
+    
+    if (receiverTimerInterval) clearInterval(receiverTimerInterval);
+
+    receiverTimerInterval = setInterval(() => {
+        const now = Date.now();
+        const diff = expiryTimestamp - now;
+
+        if (diff <= 0) {
+            clearInterval(receiverTimerInterval);
+            statusText.innerHTML = `<span style="color: #ff5e57;">${t('statusExpired')}</span>`;
+            document.getElementById('connectBtn').disabled = true;
+            return;
+        }
+
+        const minutes = Math.floor(diff / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        statusText.textContent = `รหัสจะหมดอายุภายใน ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+// 3. ปรับปรุงส่วน window.onload ให้รองรับการอ่านค่า exp
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const exp = urlParams.get('exp');
+
+    if (code) {
+        // เปลี่ยนหน้าไปที่ Tab รับไฟล์
+        switchTab('receive');
+        document.getElementById('receiverCode').value = code;
+        
+        // ถ้ามีค่า exp ติดมา ให้เริ่มนับถอยหลังทันที
+        if (exp) {
+            startReceiverCountdown(parseInt(exp));
+        }
+    }
+});
+
 // 💾 File Size Limit (2GB Fallback/Warning)
 const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024;
 
