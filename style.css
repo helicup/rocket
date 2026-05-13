@@ -1,3 +1,4 @@
+/* ✅ FIX: เพิ่ม Universal Selector ที่บรรทัดแรก */
 * {
     margin: 0;
     padding: 0;
@@ -26,6 +27,7 @@ header {
     padding: 30px 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    position: relative;
 }
 
 header h1 {
@@ -54,6 +56,23 @@ header h1 {
     font-weight: 600;
 }
 
+/* 🌐 Language Toggle */
+.btn-lang {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+.btn-lang:hover { background: rgba(255,255,255,0.4); }
+
 .tabs {
     display: flex;
     border-bottom: 2px solid #eee;
@@ -80,9 +99,7 @@ header h1 {
     padding: 30px 20px;
 }
 
-.section.active {
-    display: block;
-}
+.section.active { display: block; }
 
 .upload-area {
     border: 3px dashed #667eea;
@@ -100,10 +117,7 @@ header h1 {
     transform: scale(1.02);
 }
 
-.upload-icon {
-    font-size: 4em;
-    margin-bottom: 15px;
-}
+.upload-icon { font-size: 4em; margin-bottom: 15px; }
 
 .file-info {
     display: flex;
@@ -115,24 +129,10 @@ header h1 {
     margin: 20px 0;
 }
 
-.file-icon {
-    font-size: 2.5em;
-}
-
-.file-details {
-    flex: 1;
-}
-
-.file-name {
-    font-weight: 600;
-    margin-bottom: 5px;
-    word-break: break-all;
-}
-
-.file-size {
-    color: #666;
-    font-size: 0.9em;
-}
+.file-icon { font-size: 2.5em; }
+.file-details { flex: 1; }
+.file-name { font-weight: 600; margin-bottom: 5px; word-break: break-all; }
+.file-size { color: #666; font-size: 0.9em; }
 
 .btn-remove {
     background: #ff4757;
@@ -145,16 +145,12 @@ header h1 {
     font-size: 1.2em;
     transition: transform 0.2s;
 }
-
-.btn-remove:hover {
-    transform: scale(1.1);
-}
+.btn-remove:hover { transform: scale(1.1); }
 
 .btn-primary {
     width: 100%;
     padding: 15px;
-    /* เปลี่ยนจากสีม่วง เป็น ส้ม-แดง */
-    background: linear-gradient(135deg, #ff9f43 0%, #ff5e57 100%); 
+    background: linear-gradient(135deg, #ff9f43 0%, #ff5e57 100%);
     color: white;
     border: none;
     border-radius: 10px;
@@ -162,26 +158,15 @@ header h1 {
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
-    
-    /* เพิ่มเงาให้ปุ่มดูลอยเด่นขึ้น */
     box-shadow: 0 4px 15px rgba(255, 94, 87, 0.4); 
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    /* เงาเข้มขึ้นเมื่อเอาเมาส์ชี้ */
-    box-shadow: 0 6px 20px rgba(255, 94, 87, 0.6); 
+    box-shadow: 0 6px 20px rgba(255, 94, 87, 0.6);
 }
 
-.btn-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-}
-
-.btn-primary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btn-secondary {
     width: 100%;
@@ -203,14 +188,9 @@ header h1 {
     border-color: transparent;
     box-shadow: 0 4px 15px rgba(255, 94, 87, 0.4);
 }
-.code-display {
-    text-align: center;
-}
 
-.code-display h3 {
-    margin-bottom: 20px;
-    color: #333;
-}
+.code-display { text-align: center; }
+.code-display h3 { margin-bottom: 20px; color: #333; }
 
 #qrcode {
     display: flex;
@@ -228,13 +208,13 @@ header h1 {
     justify-content: center;
     align-items: center;
     margin: 20px 0;
+    flex-wrap: wrap;
 }
 
 .code-text {
     font-size: 2.5em;
     font-weight: bold;
     letter-spacing: 5px;
-    /* สีส้มแดง */
     background: linear-gradient(135deg, #ff9f43 0%, #ff5e57 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -242,7 +222,6 @@ header h1 {
     padding: 15px 30px;
     font-family: monospace;
 }
-
 
 .btn-copy {
     padding: 10px 20px;
@@ -255,11 +234,8 @@ header h1 {
     transition: all 0.2s;
     box-shadow: 0 2px 10px rgba(255, 94, 87, 0.3);
 }
+.btn-copy:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(255, 94, 87, 0.5); }
 
-.btn-copy:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255, 94, 87, 0.5);
-}
 .code-input {
     width: 100%;
     padding: 15px;
@@ -273,11 +249,7 @@ header h1 {
     text-transform: uppercase;
     transition: border-color 0.3s;
 }
-
-.code-input:focus {
-    outline: none;
-    border-color: #667eea;
-}
+.code-input:focus { outline: none; border-color: #667eea; }
 
 .status {
     display: flex;
@@ -298,16 +270,23 @@ header h1 {
     animation: pulse 1.5s infinite;
 }
 
-.status-dot.loading {
-    background: #ff7f4d;
-}
+.status-dot.loading { background: #ff7f4d; }
 
 @keyframes pulse {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.5; transform: scale(1.2); }
 }
 
-/* ─── Custom Modal (FIX 5) ─────────────────────────────────────────────────── */
+/* ✅ FIX: เพิ่ม Selector .expiry-timer ที่หายไป */
+.expiry-timer {
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
 .modal-overlay {
     display: none;
     position: fixed;
@@ -320,9 +299,7 @@ header h1 {
     animation: fadeIn 0.2s ease;
 }
 
-.modal-overlay.show {
-    display: flex;
-}
+.modal-overlay.show { display: flex; }
 
 .modal-box {
     background: #fff;
@@ -335,17 +312,8 @@ header h1 {
     text-align: center;
 }
 
-.modal-icon {
-    font-size: 3em;
-    margin-bottom: 12px;
-}
-
-.modal-title {
-    font-size: 1.2em;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #222;
-}
+.modal-icon { font-size: 3em; margin-bottom: 12px; }
+.modal-title { font-size: 1.2em; font-weight: 700; margin-bottom: 20px; color: #222; }
 
 .modal-meta {
     background: #f5f6fa;
@@ -361,7 +329,6 @@ header h1 {
     align-items: flex-start;
     margin-bottom: 8px;
 }
-
 .modal-row:last-child { margin-bottom: 0; }
 
 .modal-label {
@@ -381,10 +348,7 @@ header h1 {
     word-break: break-all;
 }
 
-.modal-actions {
-    display: flex;
-    gap: 12px;
-}
+.modal-actions { display: flex; gap: 12px; }
 
 .btn-modal-reject {
     flex: 1;
@@ -398,11 +362,7 @@ header h1 {
     cursor: pointer;
     transition: all 0.2s;
 }
-
-.btn-modal-reject:hover {
-    background: #ff4757;
-    color: white;
-}
+.btn-modal-reject:hover { background: #ff4757; color: white; }
 
 .btn-modal-accept {
     flex: 1;
@@ -417,16 +377,11 @@ header h1 {
     box-shadow: 0 4px 15px rgba(255, 94, 87, 0.4);
     transition: all 0.2s;
 }
-
-.btn-modal-accept:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(255, 94, 87, 0.5);
-}
+.btn-modal-accept:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255, 94, 87, 0.5); }
 
 @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: none; } }
 
-/* ─── Toast (แทน alert) ──────────────────────────────────────────────────── */
 .toast {
     position: fixed;
     bottom: 28px;
@@ -448,24 +403,7 @@ header h1 {
     text-overflow: ellipsis;
 }
 
-.toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* ─── Expiry Timer ────────────────────────────────────────────────────────── */
-    text-align: center;
-    font-size: 0.9em;
-    color: #888;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    transition: color 0.3s;
-}
-
-.expiry-timer span {
-    font-weight: 700;
-    font-family: monospace;
-}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 .progress-bar {
     height: 20px;
@@ -482,26 +420,11 @@ header h1 {
     transition: width 0.3s;
 }
 
-.progress-text {
-    text-align: center;
-    font-weight: 600;
-    color: #ff7f4d;
-}
+.progress-text { text-align: center; font-weight: 600; color: #ff7f4d; }
 
-.success-message {
-    text-align: center;
-    padding: 30px;
-}
-
-.success-icon {
-    font-size: 5em;
-    margin-bottom: 20px;
-}
-
-.success-message h3 {
-    color: #2ed573;
-    margin-bottom: 10px;
-}
+.success-message { text-align: center; padding: 30px; }
+.success-icon { font-size: 5em; margin-bottom: 20px; }
+.success-message h3 { color: #2ed573; margin-bottom: 10px; }
 
 footer {
     text-align: center;
@@ -510,28 +433,11 @@ footer {
     color: #666;
     font-size: 0.9em;
 }
-.credit {
-    margin-top: 10px;
-    font-size: 0.8em;
-    color: #888;
-    font-style: italic;
-    letter-spacing: 0.5px;
-}
+
+.credit { margin-top: 10px; font-size: 0.8em; color: #888; font-style: italic; letter-spacing: 0.5px; }
 
 @media (max-width: 600px) {
-    header h1 {
-        font-size: 2.5em;
-    }
-    
-    .code-text {
-        font-size: 1.8em;
-        letter-spacing: 3px;
-        padding: 10px 20px;
-    }
-    
-    .code-input {
-        font-size: 1.5em;
-        letter-spacing: 5px;
-    }
+    header h1 { font-size: 2.5em; }
+    .code-text { font-size: 1.8em; letter-spacing: 3px; padding: 10px 20px; }
+    .code-input { font-size: 1.5em; letter-spacing: 5px; }
 }
-
