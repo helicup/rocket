@@ -1,99 +1,44 @@
 // 🌐 i18n Configuration
 const i18n = {
     th: {
-        pageTitle: "Rocket ! — P2P File Transfer",
-        headerTitle: "🚀 Rocket !",
-        headerSubtitle: "รับ-ส่งไฟล์แบบ Peer-to-Peer",
-        badgeDirect: "⚡ ตรง",
-        badgeP2P: "📲 P2P",
-        badgeNoServer: "🌐 ไม่ผ่านเซิร์ฟเวอร์",
-        badgeEncrypted: "🔐 เข้ารหัส",
-        tabSend: "📤 ส่งไฟล์",
-        tabReceive: "📥 รับไฟล์",
-        dropzoneText: "คลิกหรือลากไฟล์มาวางที่นี่ รองรับไฟล์ทุกประเภท",
-        generateBtn: "สร้างรหัสรับ-ส่งไฟล์",
-        scanOrEnter: "สแกน QR Code หรือป้อนรหัส",
-        copyCode: "คัดลอก",
-        copyLink: "🔗 คัดลอกลิงก์",
-        expiryPrefix: "รหัสหมดอายุใน",
-        statusConnecting: "กำลังเชื่อมต่อ...",
-        statusReady: "พร้อมแล้ว — รอผู้รับเชื่อมต่อ...",
-        statusConnected: "เชื่อมต่อสำเร็จ! กำลังส่งไฟล์...",
-        statusClosed: "การเชื่อมต่อสิ้นสุดลง",
-        statusError: "เกิดข้อผิดพลาด",
-        statusExpired: "รหัสหมดอายุแล้ว — กรุณาสร้างใหม่",
-        statusRejected: "ปฏิเสธการเชื่อมต่อ — รอผู้รับใหม่...",
-        fileSent: "ส่งไฟล์สำเร็จ!",
-        fileSentDesc: "ไฟล์ของคุณถูกส่งแบบ peer-to-peer ผ่าน WebRTC",
-        sendAnother: "ส่งไฟล์อื่น",
-        enterCode: "XXXXXXXX",
-        connectBtn: "🔗 เชื่อมต่อและรับไฟล์",
-        statusConnectingReceive: "กำลังเชื่อมต่อ...",
-        fileReceived: "รับไฟล์สำเร็จ!",
-        downloading: "กำลังดาวน์โหลดอัตโนมัติ...",
-        receiveAnother: "รับไฟล์อื่น",
+        pageTitle: "Rocket ! — P2P File Transfer", headerTitle: "🚀 Rocket !", headerSubtitle: "รับ-ส่งไฟล์แบบ Peer-to-Peer",
+        badgeDirect: "⚡ ตรง", badgeP2P: "📲 P2P", badgeNoServer: "🌐 ไม่ผ่านเซิร์ฟเวอร์", badgeEncrypted: "🔐 เข้ารหัส",
+        tabSend: "📤 ส่งไฟล์", tabReceive: "📥 รับไฟล์", dropzoneText: "คลิกหรือลากไฟล์มาวางที่นี่ รองรับไฟล์ทุกประเภท",
+        generateBtn: "สร้างรหัสรับ-ส่งไฟล์", scanOrEnter: "สแกน QR Code หรือป้อนรหัส", copyCode: "คัดลอก", copyLink: "🔗 คัดลอกลิงก์",
+        expiryPrefix: "รหัสหมดอายุใน", statusConnecting: "กำลังเชื่อมต่อ...", statusReady: "พร้อมแล้ว — รอผู้รับเชื่อมต่อ...",
+        statusConnected: "เชื่อมต่อสำเร็จ! กำลังส่งไฟล์...", statusClosed: "การเชื่อมต่อสิ้นสุดลง", statusError: "เกิดข้อผิดพลาด",
+        statusExpired: "รหัสหมดอายุแล้ว — กรุณาสร้างใหม่", statusRejected: "ปฏิเสธการเชื่อมต่อ — รอผู้รับใหม่...",
+        fileSent: "ส่งไฟล์สำเร็จ!", fileSentDesc: "ไฟล์ของคุณถูกส่งแบบ peer-to-peer ผ่าน WebRTC", sendAnother: "ส่งไฟล์อื่น",
+        enterCode: "XXXXXXXX", connectBtn: "🔗 เชื่อมต่อและรับไฟล์", statusConnectingReceive: "กำลังเชื่อมต่อ...",
+        fileReceived: "รับไฟล์สำเร็จ!", downloading: "กำลังดาวน์โหลดอัตโนมัติ...", receiveAnother: "รับไฟล์อื่น",
         footerDesc: "🚀 ไฟล์ถูกส่งตรง peer-to-peer โดยไม่ผ่าน server กลาง และมีการเข้ารหัสความปลอดภัย",
-        modalTitle: "มีผู้ขอรับไฟล์",
-        modalPeerIdLabel: "PEER ID",
-        modalFileLabel: "ไฟล์",
-        modalReject: "✕ ปฏิเสธ",
-        modalAccept: "✓ ส่งไฟล์",
-        toastCopiedCode: "คัดลอก Code แล้ว: ",
-        toastCopiedLink: "คัดลอก Link แล้ว",
-        toastCodeLength: "กรุณาใส่ code 8 ตัวอักษร",
-        errLargeFile: "ไฟล์ใหญ่เกินไปสำหรับ browser (ขีดจำกัด 2GB)",
-        errMemory: "ไฟล์ใหญ่เกินไปสำหรับ RAM ของ browser",
+        modalTitle: "มีผู้ขอรับไฟล์", modalPeerIdLabel: "PEER ID", modalFileLabel: "ไฟล์", modalReject: "✕ ปฏิเสธ", modalAccept: "✓ ส่งไฟล์",
+        toastCopiedCode: "คัดลอก Code แล้ว: ", toastCopiedLink: "คัดลอก Link แล้วสำเร็จ!", toastCodeLength: "กรุณาใส่ code 8 ตัวอักษร",
+        errLargeFile: "ไฟล์ใหญ่เกินไปสำหรับ browser (ขีดจำกัด 2GB)", errMemory: "ไฟล์ใหญ่เกินไปสำหรับ RAM ของ browser",
         langBtn: "EN/TH"
     },
     en: {
-        pageTitle: "Rocket ! — P2P File Transfer",
-        headerTitle: "🚀 Rocket !",
-        headerSubtitle: "Secure P2P File Transfer",
-        badgeDirect: "⚡ DIRECT",
-        badgeP2P: "📲 P2P",
-        badgeNoServer: "🌐 NO SERVER",
-        badgeEncrypted: "🔐 ENCRYPTED",
-        tabSend: "📤 SEND",
-        tabReceive: "📥 RECEIVE",
-        dropzoneText: "Click or drop files here. All types supported.",
-        generateBtn: "Generate Transfer Code",
-        scanOrEnter: "Scan QR code or enter code",
-        copyCode: "COPY",
-        copyLink: "🔗 COPY LINK",
-        expiryPrefix: "Code expires in",
-        statusConnecting: "Connecting to peer server...",
-        statusReady: "Ready — Waiting for receiver...",
-        statusConnected: "Connected! Sending file...",
-        statusClosed: "Connection closed",
-        statusError: "Error",
-        statusExpired: "Code expired — Please generate a new one",
-        statusRejected: "Connection rejected — Waiting...",
-        fileSent: "File sent successfully!",
-        fileSentDesc: "Your file was sent peer-to-peer via WebRTC",
-        sendAnother: "Send another file",
-        enterCode: "XXXXXXXX",
-        connectBtn: "🔗 Connect & Receive File",
-        statusConnectingReceive: "Connecting...",
-        fileReceived: "File received!",
-        downloading: "Downloading automatically...",
-        receiveAnother: "Receive another file",
+        pageTitle: "Rocket ! — P2P File Transfer", headerTitle: "🚀 Rocket !", headerSubtitle: "Secure P2P File Transfer",
+        badgeDirect: "⚡ DIRECT", badgeP2P: "📲 P2P", badgeNoServer: "🌐 NO SERVER", badgeEncrypted: "🔐 ENCRYPTED",
+        tabSend: "📤 SEND", tabReceive: "📥 RECEIVE", dropzoneText: "Click or drop files here. All types supported.",
+        generateBtn: "Generate Transfer Code", scanOrEnter: "Scan QR code or enter code", copyCode: "COPY", copyLink: "🔗 COPY LINK",
+        expiryPrefix: "Code expires in", statusConnecting: "Connecting to peer server...", statusReady: "Ready — Waiting for receiver...",
+        statusConnected: "Connected! Sending file...", statusClosed: "Connection closed", statusError: "Error",
+        statusExpired: "Code expired — Please generate a new one", statusRejected: "Connection rejected — Waiting...",
+        fileSent: "File sent successfully!", fileSentDesc: "Your file was sent peer-to-peer via WebRTC", sendAnother: "Send another file",
+        enterCode: "XXXXXXXX", connectBtn: "🔗 Connect & Receive File", statusConnectingReceive: "Connecting...",
+        fileReceived: "File received!", downloading: "Downloading automatically...", receiveAnother: "Receive another file",
         footerDesc: "🚀 Files are sent peer-to-peer without a central server and are encrypted.",
-        modalTitle: "Incoming File Request",
-        modalPeerIdLabel: "PEER ID",
-        modalFileLabel: "FILE",
-        modalReject: "✕ Reject",
-        modalAccept: "✓ Send",
-        toastCopiedCode: "Code copied: ",
-        toastCopiedLink: "Link copied",
-        toastCodeLength: "Please enter an 8-character code",
-        errLargeFile: "File too large for browser (limit 2GB)",
-        errMemory: "File too large for browser RAM",
+        modalTitle: "Incoming File Request", modalPeerIdLabel: "PEER ID", modalFileLabel: "FILE", modalReject: "✕ Reject", modalAccept: "✓ Send",
+        toastCopiedCode: "Code copied: ", toastCopiedLink: "Link copied successfully!", toastCodeLength: "Please enter an 8-character code",
+        errLargeFile: "File too large for browser (limit 2GB)", errMemory: "File too large for browser RAM",
         langBtn: "TH/EN"
     }
 };
 
 let currentLang = localStorage.getItem('lang') || 'th';
 function t(key) { return i18n[currentLang]?.[key] || key; }
+
 function setLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('lang', lang);
@@ -110,66 +55,7 @@ function setLanguage(lang) {
     if (btn) btn.textContent = i18n[lang].langBtn;
 }
 
-// 1. ปรับปรุงฟังก์ชันสร้างลิงก์ให้แนบ Timestamp
-function copyLink() {
-    const code = document.getElementById('displayCode').textContent;
-    if (code === 'XXXXXXXX') return;
-
-    // คำนวณเวลาหมดอายุ (5 นาทีจากตอนนี้)
-    const expiryTimestamp = Date.now() + (5 * 60 * 1000);
-    
-    const url = new URL(window.location.href);
-    url.searchParams.set('code', code);
-    url.searchParams.set('exp', expiryTimestamp); // แนบเวลาหมดอายุไปกับลิงก์
-
-    navigator.clipboard.writeText(url.toString()).then(() => {
-        showToast(t('copyLink') + ' สำเร็จ!');
-    });
-}
-
-// 2. เพิ่มฟังก์ชันนับถอยหลังสำหรับฝั่งผู้รับ
-let receiverTimerInterval;
-function startReceiverCountdown(expiryTimestamp) {
-    const statusText = document.getElementById('receiveStatusText');
-    
-    if (receiverTimerInterval) clearInterval(receiverTimerInterval);
-
-    receiverTimerInterval = setInterval(() => {
-        const now = Date.now();
-        const diff = expiryTimestamp - now;
-
-        if (diff <= 0) {
-            clearInterval(receiverTimerInterval);
-            statusText.innerHTML = `<span style="color: #ff5e57;">${t('statusExpired')}</span>`;
-            document.getElementById('connectBtn').disabled = true;
-            return;
-        }
-
-        const minutes = Math.floor(diff / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
-        statusText.textContent = `รหัสจะหมดอายุภายใน ${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
-}
-
-// 3. ปรับปรุงส่วน window.onload ให้รองรับการอ่านค่า exp
-window.addEventListener('load', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const exp = urlParams.get('exp');
-
-    if (code) {
-        // เปลี่ยนหน้าไปที่ Tab รับไฟล์
-        switchTab('receive');
-        document.getElementById('receiverCode').value = code;
-        
-        // ถ้ามีค่า exp ติดมา ให้เริ่มนับถอยหลังทันที
-        if (exp) {
-            startReceiverCountdown(parseInt(exp));
-        }
-    }
-});
-
-// 💾 File Size Limit (2GB Fallback/Warning)
+// 💾 File Size Limit
 const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024;
 
 // Global variables
@@ -178,7 +64,7 @@ let conn = null;
 let currentFile = null;
 let peerCode = null;
 let codeCreatedAt = null;
-const CODE_EXPIRY_MS = 5 * 60 * 1000; // 5 นาที
+const CODE_EXPIRY_MS = 5 * 60 * 1000;
 
 // ─── Crypto RNG ──────────────────────────────────────────────────────────────
 function generateSecureCode(length = 8) {
@@ -193,10 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupFileInput();
     setupDragDrop();
     setLanguage(currentLang);
-    
-    document.getElementById('langToggle').addEventListener('click', () => {
-        setLanguage(currentLang === 'th' ? 'en' : 'th');
-    });
+    document.getElementById('langToggle').addEventListener('click', () => setLanguage(currentLang === 'th' ? 'en' : 'th'));
 });
 
 // ─── Tab switching ────────────────────────────────────────────────────────────
@@ -214,8 +97,7 @@ function switchTab(tab) {
 
 // ─── File input & drag-drop ───────────────────────────────────────────────────
 function setupFileInput() {
-    const fileInput = document.getElementById('fileInput');
-    fileInput.addEventListener('change', (e) => {
+    document.getElementById('fileInput').addEventListener('change', (e) => {
         if (e.target.files.length > 0) handleFile(e.target.files[0]);
     });
 }
@@ -223,10 +105,7 @@ function setupFileInput() {
 function setupDragDrop() {
     const dropZone = document.getElementById('dropZone');
     dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
-    });
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
@@ -236,10 +115,7 @@ function setupDragDrop() {
 }
 
 function handleFile(file) {
-    if (file.size > MAX_FILE_SIZE) {
-        showToast(t('errLargeFile'));
-        return;
-    }
+    if (file.size > MAX_FILE_SIZE) { showToast(t('errLargeFile')); return; }
     currentFile = file;
     document.getElementById('fileName').textContent = file.name;
     document.getElementById('fileSize').textContent = formatFileSize(file.size);
@@ -259,25 +135,19 @@ function generateCode() {
     if (!currentFile) return;
     peerCode = generateSecureCode(8);
     codeCreatedAt = Date.now();
-
     initializePeer(peerCode);
 
     document.getElementById('sendStep1').style.display = 'none';
     document.getElementById('sendStep2').style.display = 'block';
     document.getElementById('peerCode').textContent = peerCode;
 
-    const qrUrl = window.location.href.split('?')[0] + '?code=' + peerCode;
+    const qrUrl = `${window.location.origin}${window.location.pathname}?code=${peerCode}&exp=${Date.now() + CODE_EXPIRY_MS}`;
     document.getElementById('qrcode').innerHTML = '';
-    new QRCode(document.getElementById('qrcode'), {
-        text: qrUrl,
-        width: 200,
-        height: 200
-    });
-
+    new QRCode(document.getElementById('qrcode'), { text: qrUrl, width: 200, height: 200 });
     startExpiryCountdown();
 }
 
-// ─── Expiry countdown ─────────────────────────────────────────────────────────
+// ─── Expiry countdown (Sender) ────────────────────────────────────────────────
 let countdownInterval = null;
 function startExpiryCountdown() {
     clearInterval(countdownInterval);
@@ -285,12 +155,10 @@ function startExpiryCountdown() {
     const timerContainer = document.getElementById('expiryTimer');
     timerContainer.style.color = '';
     countdownInterval = setInterval(() => {
-        const elapsed = Date.now() - codeCreatedAt;
-        const remaining = Math.max(0, CODE_EXPIRY_MS - elapsed);
+        const remaining = Math.max(0, CODE_EXPIRY_MS - (Date.now() - codeCreatedAt));
         const mins = Math.floor(remaining / 60000);
         const secs = Math.floor((remaining % 60000) / 1000);
         timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-
         if (remaining <= 60000) timerContainer.style.color = '#ff4757';
         if (remaining === 0) {
             clearInterval(countdownInterval);
@@ -300,22 +168,20 @@ function startExpiryCountdown() {
     }, 1000);
 }
 
-// ─── Custom modal ───────
+// ─── Custom modal ─────────────────────────────────────────────────────────────
 let _modalResolve = null;
 function showConfirmModal(peerId, fileName) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
         _modalResolve = resolve;
         document.getElementById('modalPeerId').textContent = peerId;
         document.getElementById('modalFileName').textContent = fileName || 'ไม่ทราบชื่อไฟล์';
         document.getElementById('confirmModal').classList.add('show');
     });
 }
-
 function modalAccept() {
     document.getElementById('confirmModal').classList.remove('show');
     if (_modalResolve) { _modalResolve(true); _modalResolve = null; }
 }
-
 function modalReject() {
     document.getElementById('confirmModal').classList.remove('show');
     if (_modalResolve) { _modalResolve(false); _modalResolve = null; }
@@ -324,113 +190,58 @@ function modalReject() {
 // ─── PeerJS ───────────────────────────────────────────────────────────────────
 function initializePeer(id) {
     try {
-        peer = new Peer(id, { debug: 2 }); // ใช้ Public Server ตามค่าเริ่มต้น
-        peer.on('open', (peerId) => {
-            console.log('My peer ID is: ' + peerId);
-            updateSendStatus(t('statusReady'), 'ready');
-        });
-
+        peer = new Peer(id, { debug: 2 }); // Public Server
+        peer.on('open', () => updateSendStatus(t('statusReady'), 'ready'));
         peer.on('connection', async (connection) => {
-            if (Date.now() - codeCreatedAt > CODE_EXPIRY_MS) {
-                connection.close();
-                updateSendStatus(t('statusExpired'), 'error');
-                return;
-            }
-
+            if (Date.now() - codeCreatedAt > CODE_EXPIRY_MS) { connection.close(); updateSendStatus(t('statusExpired'), 'error'); return; }
             const confirmed = await showConfirmModal(connection.peer, currentFile?.name);
-            if (!confirmed) {
-                connection.close();
-                updateSendStatus(t('statusRejected'), 'ready');
-                return;
-            }
-
+            if (!confirmed) { connection.close(); updateSendStatus(t('statusRejected'), 'ready'); return; }
             handleConnection(connection);
         });
-
-        peer.on('error', (err) => {
-            console.error('Peer error:', err);
-            updateSendStatus(t('statusError') + ': ' + err.message, 'error');
-        });
-    } catch (err) {
-        console.error('Failed to initialize peer:', err);
-        updateSendStatus('Connection failed: ' + err.message, 'error');
-    }
+        peer.on('error', (err) => updateSendStatus(`${t('statusError')}: ${err.message}`, 'error'));
+    } catch (err) { updateSendStatus(`Connection failed: ${err.message}`, 'error'); }
 }
 
 function handleConnection(connection) {
     conn = connection;
-    conn.on('open', () => {
-        console.log('Connected to: ' + conn.peer);
-        updateSendStatus(t('statusConnected'), 'connected');
-        sendFile();
-    });
-
-    conn.on('data', (data) => {
-        if (data.type === 'progress') updateSendProgress(data.progress);
-    });
-
-    conn.on('close', () => {
-        console.log('Connection closed');
-        updateSendStatus(t('statusClosed'), 'closed');
-    });
-
-    conn.on('error', (err) => {
-        console.error('Connection error:', err);
-        updateSendStatus(t('statusError'), 'error');
-    });
+    conn.on('open', () => { updateSendStatus(t('statusConnected'), 'connected'); sendFile(); });
+    conn.on('data', (data) => { if (data.type === 'progress') updateSendProgress(data.progress); });
+    conn.on('close', () => updateSendStatus(t('statusClosed'), 'closed'));
+    conn.on('error', (err) => updateSendStatus(t('statusError'), 'error'));
 }
 
 // ─── Send file w/ Backpressure ───────────────────────────────────────────────
-const BUFFER_HIGH = 1 * 1024 * 1024;  // 1MB
-const BUFFER_LOW  = 256 * 1024;        // 256KB
+const BUFFER_HIGH = 1 * 1024 * 1024;
+const BUFFER_LOW  = 256 * 1024;
 
 function sendFile() {
     if (!conn || !currentFile) return;
     const chunkSize = 64 * 1024;
     let offset = 0;
-
-    conn.send({
-        type: 'metadata',
-        name: currentFile.name,
-        size: currentFile.size,
-        mimeType: currentFile.type
-    });
+    conn.send({ type: 'metadata', name: currentFile.name, size: currentFile.size, mimeType: currentFile.type });
 
     function readNextChunk() {
         if (!conn) return;
-
         const dc = conn.dataChannel;
         if (dc && dc.bufferedAmount > BUFFER_HIGH) {
             dc.bufferedAmountLowThreshold = BUFFER_LOW;
             dc.addEventListener('bufferedamountlow', readNextChunk, { once: true });
             return;
         }
-
         if (offset >= currentFile.size) {
-            setTimeout(() => {
-                document.getElementById('sendStep2').style.display = 'none';
-                document.getElementById('sendStep3').style.display = 'block';
-            }, 500);
+            setTimeout(() => { document.getElementById('sendStep2').style.display = 'none'; document.getElementById('sendStep3').style.display = 'block'; }, 500);
             return;
         }
-
         const chunk = currentFile.slice(offset, offset + chunkSize);
         const reader = new FileReader();
         reader.onload = (e) => {
-            conn.send({
-                type: 'chunk',
-                data: e.target.result,
-                offset: offset,
-                total: currentFile.size
-            });
-
+            conn.send({ type: 'chunk', data: e.target.result, offset, total: currentFile.size });
             offset = Math.min(offset + chunkSize, currentFile.size);
             updateSendProgress(Math.min(100, Math.round((offset / currentFile.size) * 100)));
             readNextChunk();
         };
         reader.readAsArrayBuffer(chunk);
     }
-
     readNextChunk();
 }
 
@@ -441,12 +252,11 @@ function updateSendStatus(message, status) {
     const text = statusEl.querySelector('span');
     text.textContent = message;
     dot.style.animation = '';
-    if (status === 'ready')          dot.style.background = '#2ed573';
+    if (status === 'ready') dot.style.background = '#2ed573';
     else if (status === 'connected') { dot.style.background = '#667eea'; dot.classList.add('loading'); }
-    else if (status === 'error')     { dot.style.background = '#ff4757'; dot.style.animation = 'none'; }
-    else if (status === 'closed')    dot.style.background = '#ffa502';
+    else if (status === 'error') { dot.style.background = '#ff4757'; dot.style.animation = 'none'; }
+    else if (status === 'closed') dot.style.background = '#ffa502';
 }
-
 function updateSendProgress(progress) {
     document.getElementById('sendProgressContainer').style.display = 'block';
     document.getElementById('sendProgress').style.width = progress + '%';
@@ -454,179 +264,147 @@ function updateSendProgress(progress) {
 }
 
 // ─── Clipboard + Toast ────────────────────────────────────────────────────────
-function copyCode() {
-    navigator.clipboard.writeText(peerCode).then(() => showToast(t('toastCopiedCode') + peerCode));
-}
+function copyCode() { navigator.clipboard.writeText(peerCode).then(() => showToast(t('toastCopiedCode') + peerCode)); }
 
 function copyLink() {
-    const url = window.location.href.split('?')[0] + '?code=' + peerCode;
-    navigator.clipboard.writeText(url).then(() => showToast(t('toastCopiedLink')));
+    const code = document.getElementById('peerCode').textContent;
+    if (code === 'XXXXXXXX') return;
+    const exp = Date.now() + CODE_EXPIRY_MS;
+    const url = new URL(window.location.href);
+    url.searchParams.set('code', code);
+    url.searchParams.set('exp', exp);
+    navigator.clipboard.writeText(url.toString()).then(() => showToast(t('toastCopiedLink')));
 }
 
 function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2500);
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
 // ─── Reset send ───────────────────────────────────────────────────────────────
 function resetSend() {
-    removeFile();
-    clearInterval(countdownInterval);
+    removeFile(); clearInterval(countdownInterval);
     if (peer) { peer.destroy(); peer = null; }
-    if (conn) { conn.close();   conn = null; }
+    if (conn) { conn.close(); conn = null; }
     document.getElementById('sendStep1').style.display = 'block';
     document.getElementById('sendStep2').style.display = 'none';
     document.getElementById('sendStep3').style.display = 'none';
     document.getElementById('sendProgressContainer').style.display = 'none';
     document.getElementById('qrcode').innerHTML = '';
-    peerCode = null;
-    codeCreatedAt = null;
+    peerCode = null; codeCreatedAt = null;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // RECEIVER
 // ═══════════════════════════════════════════════════════════════════════════════
+let receiverTimerInterval = null;
 function connectToSender() {
     const code = document.getElementById('receiverCode').value.toUpperCase().trim();
-    if (code.length !== 8) {
-        showToast(t('toastCodeLength'));
-        return;
-    }
-
+    if (code.length !== 8) { showToast(t('toastCodeLength')); return; }
     document.getElementById('receiveStep1').style.display = 'none';
     document.getElementById('receiveStep2').style.display = 'block';
 
     const randomId = generateSecureCode(12).toLowerCase();
-
     try {
         peer = new Peer(randomId, { debug: 2 });
+        peer.on('open', () => connectToPeer(code));
+        peer.on('error', (err) => document.getElementById('receiveStatusText').textContent = `${t('statusError')}: ${err.message}`);
+    } catch (err) { document.getElementById('receiveStatusText').textContent = `Connection failed: ${err.message}`; }
+}
 
-        peer.on('open', () => {
-            console.log('Receiver peer ID: ' + peer.id);
-            connectToPeer(code);
-        });
-
-        peer.on('error', (err) => {
-            console.error('Peer error:', err);
-            document.getElementById('receiveStatusText').textContent = t('statusError') + ': ' + err.message;
-        });
-    } catch (err) {
-        console.error('Failed to initialize peer:', err);
-        document.getElementById('receiveStatusText').textContent = 'Connection failed: ' + err.message;
-    }
+function startReceiverCountdown(expiryTimestamp) {
+    clearInterval(receiverTimerInterval);
+    const expiryEl = document.getElementById('receiverExpiry');
+    if (!expiryEl) return;
+    receiverTimerInterval = setInterval(() => {
+        const diff = expiryTimestamp - Date.now();
+        if (diff <= 0) {
+            clearInterval(receiverTimerInterval);
+            expiryEl.textContent = `⏱ ${t('statusExpired')}`;
+            expiryEl.style.color = '#ff5e57';
+            return;
+        }
+        const m = Math.floor(diff / 60000);
+        const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+        expiryEl.textContent = `⏱ ${t('expiryPrefix')} ${m}:${s}`;
+    }, 1000);
 }
 
 function connectToPeer(senderCode) {
     try {
         conn = peer.connect(senderCode, { reliable: true });
-        conn.on('open', () => {
-            console.log('Connected to sender: ' + senderCode);
-            document.getElementById('receiveStatusText').textContent = t('statusConnectingReceive');
-        });
-
+        conn.on('open', () => document.getElementById('receiveStatusText').textContent = t('statusConnectingReceive'));
         conn.on('data', (data) => handleReceivedData(data));
         conn.on('close', () => console.log('Connection closed'));
-        conn.on('error', (err) => {
-            console.error('Connection error:', err);
-            document.getElementById('receiveStatusText').textContent = t('statusError');
-        });
-    } catch (err) {
-        console.error('Failed to connect:', err);
-        document.getElementById('receiveStatusText').textContent = 'Connection failed — Please check the code';
-    }
+        conn.on('error', (err) => document.getElementById('receiveStatusText').textContent = t('statusError'));
+    } catch (err) { document.getElementById('receiveStatusText').textContent = 'Connection failed — Please check the code'; }
 }
 
 // ─── Receive: Pre-allocated buffer ────────────────────────────────────────────
-let receivedBuffer   = null;
-let receivedBytes    = 0;
-let receivedMetadata = null;
+let receivedBuffer = null, receivedBytes = 0, receivedMetadata = null;
 
 function handleReceivedData(data) {
     if (data.type === 'metadata') {
-        if (data.size > MAX_FILE_SIZE) {
-            showToast(t('errLargeFile'));
-            conn.close();
-            return;
-        }
-        
-        receivedMetadata = data;
-        receivedBytes    = 0;
-        try {
-            receivedBuffer = new Uint8Array(data.size);
-        } catch (e) {
-            showToast(t('errMemory'));
-            conn.close();
-            return;
-        }
-
-        console.log('Receiving file:', data.name, formatFileSize(data.size));
+        if (data.size > MAX_FILE_SIZE) { showToast(t('errLargeFile')); conn.close(); return; }
+        receivedMetadata = data; receivedBytes = 0;
+        try { receivedBuffer = new Uint8Array(data.size); }
+        catch (e) { showToast(t('errMemory')); conn.close(); return; }
         document.getElementById('receiveProgressContainer').style.display = 'block';
-
     } else if (data.type === 'chunk') {
         if (!receivedBuffer || !receivedMetadata) return;
-
         receivedBuffer.set(new Uint8Array(data.data), data.offset);
         receivedBytes += data.data.byteLength;
-
         const progress = Math.min(100, Math.round((receivedBytes / receivedMetadata.size) * 100));
         document.getElementById('receiveProgress').style.width = progress + '%';
         document.getElementById('receiveProgressText').textContent = progress + '%';
-
         if (receivedBytes >= receivedMetadata.size) assembleFile();
     }
 }
 
 function assembleFile() {
-    console.log('Assembling file...');
     const blob = new Blob([receivedBuffer], { type: receivedMetadata.mimeType });
     receivedBuffer = null;
-
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = receivedMetadata.name;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.href = url; a.download = receivedMetadata.name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 100);
-
     document.getElementById('receivedFileName').textContent = receivedMetadata.name;
     document.getElementById('receiveStep2').style.display = 'none';
     document.getElementById('receiveStep3').style.display = 'block';
-
-    receivedBytes    = 0;
-    receivedMetadata = null;
+    receivedBytes = 0; receivedMetadata = null;
 }
 
 function resetReceive() {
     if (peer) { peer.destroy(); peer = null; }
-    if (conn) { conn.close();   conn = null; }
-    receivedBuffer   = null;
-    receivedBytes    = 0;
-    receivedMetadata = null;
+    if (conn) { conn.close(); conn = null; }
+    receivedBuffer = null; receivedBytes = 0; receivedMetadata = null;
     document.getElementById('receiverCode').value = '';
     document.getElementById('receiveStep1').style.display = 'block';
     document.getElementById('receiveStep2').style.display = 'none';
     document.getElementById('receiveStep3').style.display = 'none';
     document.getElementById('receiveProgressContainer').style.display = 'none';
+    document.getElementById('receiverExpiry').textContent = '';
+    clearInterval(receiverTimerInterval);
 }
 
 // ─── Utils ────────────────────────────────────────────────────────────────────
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const k = 1024; const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 }
 
 window.addEventListener('load', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const exp = params.get('exp');
     if (code) {
         document.getElementById('receiverCode').value = code.toUpperCase();
         switchTab('receive');
+        if (exp) startReceiverCountdown(parseInt(exp));
     }
 });
