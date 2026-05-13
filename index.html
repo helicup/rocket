@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Secure P2P File Transfer via WebRTC. No server required, end-to-end encrypted.">
     <meta name="theme-color" content="#667eea">
-    <title data-i18n="pageTitle">Rocket ! — P2P File Transfer</title>
-    <!-- Favicon รูปจรวด -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <title data-i18n="pageTitle">Rocket! — P2P File Transfer</title>
+    <link rel="icon" href="image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 data-i18n="headerTitle">🚀 Rocket !</h1>
+            <h1 data-i18n="headerTitle">🚀 Rocket!</h1>
             <p class="subtitle" data-i18n="headerSubtitle">รับ-ส่งไฟล์แบบ Peer-to-Peer</p>
             <div class="badges">
                 <span class="badge" data-i18n="badgeDirect">⚡ DIRECT</span>
@@ -21,7 +20,8 @@
                 <span class="badge" data-i18n="badgeNoServer">🌐 NO SERVER</span>
                 <span class="badge" data-i18n="badgeEncrypted">🔐 ENCRYPTED</span>
             </div>
-            <button id="langToggle" class="btn-lang">EN/TH</button>
+            <!-- ✅ ปุ่มจะแสดงชื่อ/ธง ของ "ภาษาที่จะเปลี่ยนไป" อัตโนมัติ -->
+            <button id="langToggle" class="btn-lang">🇬🇧 English</button>
         </header>
 
         <div class="tabs">
@@ -95,6 +95,7 @@
                     <div class="status-dot"></div>
                     <span id="receiveStatusText" data-i18n="statusConnectingReceive">กำลังเชื่อมต่อ...</span>
                 </div>
+                <!-- ✅ แยก Element นับถอยหลังออกจาก Status Text ป้องกันการทับกัน -->
                 <div id="receiverExpiry" class="expiry-timer"></div>
                 <div id="receiveProgressContainer" style="display:none;">
                     <div class="progress-bar"><div id="receiveProgress" class="progress-fill"></div></div>
@@ -115,7 +116,7 @@
 
         <footer>
             <p data-i18n="footerDesc">🚀 ไฟล์ถูกส่งตรง peer-to-peer โดยไม่ผ่าน server กลาง และมีการเข้ารหัสความปลอดภัย</p>
-            <p class="credit">Inspired by Beam P2P 🤖 Coded by Qwen3.6-Plus</p>
+            <p class="credit">Inspired by Beam P2P 🤖 Powered by Qwen, Claude, GPT & Gemini</p>
         </footer>
     </div>
 
