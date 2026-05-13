@@ -62,6 +62,9 @@
                     <div class="status-dot"></div>
                     <span>Connecting to peer server...</span>
                 </div>
+                <div class="expiry-timer" id="expiryTimer">
+                    ⏱ Code หมดอายุใน <span id="expiryCountdown">5:00</span>
+                </div>
                 <div class="progress-container" id="sendProgressContainer" style="display:none;">
                     <div class="progress-bar">
                         <div class="progress-fill" id="sendProgress"></div>
@@ -83,9 +86,9 @@
         <!-- RECEIVE SECTION -->
         <section id="receiveSection" class="section">
             <div id="receiveStep1">
-                <h3>Enter 6-digit code from sender</h3>
+                <h3>Enter 8-character code from sender</h3>
                 <input type="text" id="receiverCode" class="code-input" 
-                       placeholder="XXXXXX" maxlength="6" pattern="[A-Za-z0-9]{6}">
+                       placeholder="XXXXXXXX" maxlength="8" pattern="[A-Za-z0-9]{8}">
                 <button class="btn-primary" onclick="connectToSender()">
                     🔗 Connect & Receive File
                 </button>
@@ -120,6 +123,31 @@
             <p class="credit">Inspired by Beam P2P 🤖 Coded by Qwen3.6-Plus</p>
         </footer>
     </div>
+
+    <!-- FIX 5: Custom confirm modal แทน browser confirm() -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-icon">🔔</div>
+            <h3 class="modal-title">มีผู้ขอรับไฟล์</h3>
+            <div class="modal-meta">
+                <div class="modal-row">
+                    <span class="modal-label">Peer ID</span>
+                    <span class="modal-value" id="modalPeerId"></span>
+                </div>
+                <div class="modal-row">
+                    <span class="modal-label">ไฟล์</span>
+                    <span class="modal-value" id="modalFileName"></span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-reject" onclick="modalReject()">✕ ปฏิเสธ</button>
+                <button class="btn-modal-accept" onclick="modalAccept()">✓ ส่งไฟล์</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification แทน alert() -->
+    <div id="toast" class="toast"></div>
 
     <script src="app.js"></script>
 </body>
