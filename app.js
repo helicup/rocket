@@ -318,6 +318,7 @@ function startReceiverCountdown(expiryTimestamp) {
     clearInterval(receiverTimerInterval);
     const expiryEl = document.getElementById('receiverExpiry');
     if (!expiryEl) return;
+    
     receiverTimerInterval = setInterval(() => {
         const diff = expiryTimestamp - Date.now();
         if (diff <= 0) {
@@ -335,11 +336,24 @@ function startReceiverCountdown(expiryTimestamp) {
 function connectToPeer(senderCode) {
     try {
         conn = peer.connect(senderCode, { reliable: true });
-        conn.on('open', () => document.getElementById('receiveStatusText').textContent = t('statusConnectingReceive'));
+        conn.on('open', () => {
+            console.log('Connected to sender:', senderCode);
+            // ✅ แก้: แสดงสถานะเมื่อเชื่อมต่อสำเร็จแล้ว
+            document.getElementById('receiveStatusText').textContent = t('statusConnected') || 'เชื่อมต่อสำเร็จ! กำลังรับไฟล์...';
+            // ✅ หยุดนับถอยหลังเมื่อเริ่มรับไฟล์ได้จริง (ป้องกันทับ UI)
+            clearInterval(receiverTimerInterval);
+        });
+
         conn.on('data', (data) => handleReceivedData(data));
         conn.on('close', () => console.log('Connection closed'));
-        conn.on('error', (err) => document.getElementById('receiveStatusText').textContent = t('statusError'));
-    } catch (err) { document.getElementById('receiveStatusText').textContent = 'Connection failed — Please check the code'; }
+        conn.on('error', (err) => {
+            console.error('Connection error:', err);
+            document.getElementById('receiveStatusText').textContent = t('statusError');
+        });
+    } catch (err) {
+        console.error('Failed to connect:', err);
+        document.getElementById('receiveStatusText').textContent = 'Connection failed — Please check the code';
+    }
 }
 
 // ─── Receive: Pre-allocated buffer ────────────────────────────────────────────
@@ -351,11 +365,16 @@ function handleReceivedData(data) {
         receivedMetadata = data; receivedBytes = 0;
         try { receivedBuffer = new Uint8Array(data.size); }
         catch (e) { showToast(t('errMemory')); conn.close(); return; }
+        
+        // ✅ อัปเดต UI เมื่อผู้ส่งเริ่มส่งข้อมูลจริง
+        document.getElementById('receiveStatusText').textContent = t('downloading') || 'กำลังดาวน์โหลดไฟล์...';
         document.getElementById('receiveProgressContainer').style.display = 'block';
+        
     } else if (data.type === 'chunk') {
         if (!receivedBuffer || !receivedMetadata) return;
         receivedBuffer.set(new Uint8Array(data.data), data.offset);
         receivedBytes += data.data.byteLength;
+        
         const progress = Math.min(100, Math.round((receivedBytes / receivedMetadata.size) * 100));
         document.getElementById('receiveProgress').style.width = progress + '%';
         document.getElementById('receiveProgressText').textContent = progress + '%';
