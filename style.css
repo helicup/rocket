@@ -119,14 +119,28 @@ header h1 {
 
 .upload-icon { font-size: 4em; margin-bottom: 15px; }
 
+/* ปรับให้ข้อมูลไฟล์จัดวางแบบแนวตั้ง */
 .file-info {
     display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    background: #f0f4ff;
-    border-radius: 10px;
-    margin: 20px 0;
+    flex-direction: column; /* แยกบรรทัด */
+    align-items: center;    /* จัดให้อยู่กึ่งกลาง */
+    gap: 15px;             /* เพิ่มระยะห่างระหว่างชื่อไฟล์กับปุ่ม */
+    width: 100%;
+}
+
+/* ปรับให้ปุ่มแผ่เต็มความกว้าง หรือกว้างพอเหมาะ */
+#generateBtn {
+    width: 100%;           /* ให้ปุ่มกว้างเต็มพื้นที่เพื่อให้กดง่าย */
+    max-width: 250px;      /* แต่ไม่ให้กว้างเกินไปจนดูแปลก */
+    margin: 0 auto;
+}
+
+/* ตกแต่งชื่อไฟล์ให้เด่นขึ้น */
+#fileName {
+    font-weight: 600;
+    word-break: break-all; /* ป้องกันชื่อไฟล์ยาวเกินจนทะลุขอบ */
+    text-align: center;
+    color: #4a5568;
 }
 
 .file-icon { font-size: 2.5em; }
