@@ -496,3 +496,78 @@ function handleReceivedData(data) {
         receivedBytes    = 0;
         try {
             receivedBuffer = new Uint8Array(data.size);
+        } catch (e) {
+            showToast(t('errMemory'));
+            conn.close();
+            return;
+        }
+
+        console.log('Receiving file:', data.name, formatFileSize(data.size));
+        document.getElementById('receiveProgressContainer').style.display = 'block';
+
+    } else if (data.type === 'chunk') {
+        if (!receivedBuffer || !receivedMetadata) return;
+
+        receivedBuffer.set(new Uint8Array(data.data), data.offset);
+        receivedBytes += data.data.byteLength;
+
+        const progress = Math.min(100, Math.round((receivedBytes / receivedMetadata.size) * 100));
+        document.getElementById('receiveProgress').style.width = progress + '%';
+        document.getElementById('receiveProgressText').textContent = progress + '%';
+
+        if (receivedBytes >= receivedMetadata.size) assembleFile();
+    }
+}
+
+function assembleFile() {
+    console.log('Assembling file...');
+    const blob = new Blob([receivedBuffer], { type: receivedMetadata.mimeType });
+    receivedBuffer = null;
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = receivedMetadata.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+
+    document.getElementById('receivedFileName').textContent = receivedMetadata.name;
+    document.getElementById('receiveStep2').style.display = 'none';
+    document.getElementById('receiveStep3').style.display = 'block';
+
+    receivedBytes    = 0;
+    receivedMetadata = null;
+}
+
+function resetReceive() {
+    if (peer) { peer.destroy(); peer = null; }
+    if (conn) { conn.close();   conn = null; }
+    receivedBuffer   = null;
+    receivedBytes    = 0;
+    receivedMetadata = null;
+    document.getElementById('receiverCode').value = '';
+    document.getElementById('receiveStep1').style.display = 'block';
+    document.getElementById('receiveStep2').style.display = 'none';
+    document.getElementById('receiveStep3').style.display = 'none';
+    document.getElementById('receiveProgressContainer').style.display = 'none';
+}
+
+// ─── Utils ────────────────────────────────────────────────────────────────────
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+}
+
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+        document.getElementById('receiverCode').value = code.toUpperCase();
+        switchTab('receive');
+    }
+});
