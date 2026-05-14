@@ -159,7 +159,7 @@ function startExpiryCountdown() {
         const secs = Math.floor((remaining % 60000) / 1000);
         timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
         if (remaining <= 60000) timerContainer.style.color = '#ff4757';
-        if (remaining === 0) {
+        if (remaining <= 0) {
             clearInterval(countdownInterval);
             timerEl.textContent = '0:00';
             updateSendStatus(t('statusExpired'), 'error');
@@ -233,7 +233,7 @@ function sendFile() {
         const chunk = currentFile.slice(offset, offset + chunkSize);
         const reader = new FileReader();
         reader.onload = (e) => {
-            conn.send({ type: 'chunk',  e.target.result, offset, total: currentFile.size });
+            conn.send({ type: 'chunk', data: e.target.result, offset, total: currentFile.size });
             offset = Math.min(offset + chunkSize, currentFile.size);
             updateSendProgress(Math.min(100, Math.round((offset / currentFile.size) * 100)));
             readNextChunk();
@@ -250,6 +250,7 @@ function updateSendStatus(message, status) {
     const text = statusEl.querySelector('span');
     text.textContent = message;
     dot.style.animation = '';
+    dot.classList.remove('loading');
     if (status === 'ready') dot.style.background = '#2ed573';
     else if (status === 'connected') { dot.style.background = '#667eea'; dot.classList.add('loading'); }
     else if (status === 'error') { dot.style.background = '#ff4757'; dot.style.animation = 'none'; }
