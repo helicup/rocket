@@ -146,8 +146,18 @@
     <!-- Toast -->
     <div id="toast" class="toast"></div>
 
-    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!--
+        SECURITY (Fix #5 — SRI): Generate the correct hashes once by running:
+          curl -s https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js | openssl dgst -sha384 -binary | openssl base64 -A
+          curl -s https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js | openssl dgst -sha384 -binary | openssl base64 -A
+        Then replace HASH_PEERJS and HASH_QRCODE below with the output values.
+    -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"
+            integrity="sha384-HASH_PEERJS"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+            integrity="sha384-HASH_QRCODE"
+            crossorigin="anonymous"></script>
     <script src="app.js"></script>
 </body>
 </html>

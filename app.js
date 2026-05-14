@@ -36,7 +36,8 @@ const i18n = {
     }
 };
 
-let currentLang = localStorage.getItem('lang') || 'th';
+const _storedLang = localStorage.getItem('lang');
+let currentLang = (_storedLang === 'th' || _storedLang === 'en') ? _storedLang : 'th';
 function t(key) { return i18n[currentLang]?.[key] || key; }
 
 function setLanguage(lang) {
@@ -64,7 +65,10 @@ function setLanguage(lang) {
     }
 }
 
-// 💾 File Size Limit
+// ─── Dev mode flag ────────────────────────────────────────────────────────────
+const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+// ─── File Size Limit
 const MAX_FILE_SIZE = 2 * 1024 * 1024 * 1024;
 let peer = null, conn = null, currentFile = null, peerCode = null, codeCreatedAt = null;
 const CODE_EXPIRY_MS = 5 * 60 * 1000;
@@ -193,7 +197,7 @@ function modalReject() {
 // ─── PeerJS ───────────────────────────────────────────────────────────────────
 function initializePeer(id) {
     try {
-        peer = new Peer(id, { debug: 2 }); // Public Server
+        peer = new Peer(id, { debug: isDev ? 2 : 0 }); // Public Server
         peer.on('open', () => updateSendStatus(t('statusReady'), 'ready'));
         peer.on('connection', async (connection) => {
             if (Date.now() - codeCreatedAt > CODE_EXPIRY_MS) { connection.close(); updateSendStatus(t('statusExpired'), 'error'); return; }
@@ -276,7 +280,11 @@ function updateSendProgress(progress) {
 }
 
 // ─── Clipboard + Toast ────────────────────────────────────────────────────────
-function copyCode() { navigator.clipboard.writeText(peerCode).then(() => showToast(t('toastCopiedCode') + peerCode)); }
+function copyCode() {
+    navigator.clipboard.writeText(peerCode)
+        .then(() => showToast(t('toastCopiedCode') + peerCode))
+        .catch(() => showToast('Could not copy — copy manually: ' + peerCode));
+}
 
 function copyLink() {
     if (!peerCode || peerCode === 'XXXXXXXX') return;
@@ -284,7 +292,9 @@ function copyLink() {
     const url = new URL(window.location.href);
     url.searchParams.set('code', peerCode);
     url.searchParams.set('exp', exp);
-    navigator.clipboard.writeText(url.toString()).then(() => showToast(t('toastCopiedLink')));
+    navigator.clipboard.writeText(url.toString())
+        .then(() => showToast(t('toastCopiedLink')))
+        .catch(() => showToast('Could not copy — copy manually: ' + url.toString()));
 }
 
 function showToast(msg) {
@@ -318,7 +328,7 @@ function connectToSender() {
 
     const randomId = generateSecureCode(12).toLowerCase();
     try {
-        peer = new Peer(randomId, { debug: 2 });
+        peer = new Peer(randomId, { debug: isDev ? 2 : 0 });
         peer.on('open', () => connectToPeer(code));
         peer.on('error', (err) => document.getElementById('receiveStatusText').textContent = `${t('statusError')}: ${err.message}`);
     } catch (err) { document.getElementById('receiveStatusText').textContent = `Connection failed: ${err.message}`; }
@@ -347,13 +357,13 @@ function connectToPeer(senderCode) {
         conn = peer.connect(senderCode, { reliable: true });
         // ✅ แก้ไข: เมื่อเชื่อมต่อสำเร็จ ให้เปลี่ยนข้อความทันที และหยุดนับถอยหลัง
         conn.on('open', () => {
-            console.log('Connected to sender:', senderCode);
+            if (isDev) console.log('Connected to sender:', senderCode);
             document.getElementById('receiveStatusText').textContent = t('statusConnected') || 'เชื่อมต่อสำเร็จ! กำลังรับไฟล์...';
             document.getElementById('receiverExpiry').textContent = ''; // ลบ countdown ทิ้งเมื่อเชื่อมต่อแล้ว
             clearInterval(receiverTimerInterval);
         });
         conn.on('data', (data) => handleReceivedData(data));
-        conn.on('close', () => console.log('Connection closed'));
+        conn.on('close', () => { if (isDev) console.log('Connection closed'); });
         conn.on('error', (err) => {
             console.error('Connection error:', err);
             document.getElementById('receiveStatusText').textContent = t('statusError');
@@ -364,23 +374,48 @@ function connectToPeer(senderCode) {
     }
 }
 
+// ─── Filename sanitizer (Fix #1) ─────────────────────────────────────────────
+function sanitizeFilename(name) {
+    return String(name)
+        .replace(/[/\\?%*:|"<>\x00-\x1f]/g, '_')
+        .replace(/\.{2,}/g, '.')
+        .trim()
+        .slice(0, 255) || 'download';
+}
+
 // ─── Receive: Pre-allocated buffer ────────────────────────────────────────────
 function handleReceivedData(data) {
     if (data.type === 'metadata') {
-        if (data.size > MAX_FILE_SIZE) { showToast(t('errLargeFile')); conn.close(); return; }
-        receivedMetadata = data; receivedBytes = 0;
-        try { receivedBuffer = new Uint8Array(data.size); }
+        // Fix #3: validate size is a safe positive integer before allocating
+        const claimedSize = Number(data.size);
+        if (!Number.isInteger(claimedSize) || claimedSize <= 0 || claimedSize > MAX_FILE_SIZE) {
+            showToast(t('errLargeFile')); conn.close(); return;
+        }
+        // Fix #1: sanitize filename at intake so it's clean everywhere
+        receivedMetadata = { ...data, name: sanitizeFilename(data.name) };
+        receivedBytes = 0;
+        try { receivedBuffer = new Uint8Array(claimedSize); }
         catch (e) { showToast(t('errMemory')); conn.close(); return; }
 
-        console.log('Receiving file:', data.name, formatFileSize(data.size));
-        // ✅ อัปเดต UI เมื่อผู้ส่งเริ่มส่งข้อมูลจริง
+        if (isDev) console.log('Receiving file:', receivedMetadata.name, formatFileSize(claimedSize));
         document.getElementById('receiveStatusText').textContent = t('downloading') || 'กำลังดาวน์โหลดไฟล์...';
         document.getElementById('receiveProgressContainer').style.display = 'block';
 
     } else if (data.type === 'chunk') {
         if (!receivedBuffer || !receivedMetadata) return;
-        receivedBuffer.set(new Uint8Array(data.data), data.offset);
-        receivedBytes += data.data.byteLength;
+
+        // Fix #2: validate offset bounds before writing into buffer
+        const chunkBytes = new Uint8Array(data.data);
+        const offset = data.offset;
+        if (typeof offset !== 'number' || !Number.isInteger(offset) ||
+            offset < 0 || offset + chunkBytes.byteLength > receivedBuffer.byteLength) {
+            console.error('Invalid chunk offset — aborting transfer');
+            showToast('Transfer error: invalid data received');
+            conn.close(); return;
+        }
+
+        receivedBuffer.set(chunkBytes, offset);
+        receivedBytes += chunkBytes.byteLength;
         const progress = Math.min(100, Math.round((receivedBytes / receivedMetadata.size) * 100));
         document.getElementById('receiveProgress').style.width = progress + '%';
         document.getElementById('receiveProgressText').textContent = progress + '%';
@@ -389,11 +424,13 @@ function handleReceivedData(data) {
 }
 
 function assembleFile() {
-    const blob = new Blob([receivedBuffer], { type: receivedMetadata.mimeType });
+    // Fix #7: ignore sender-supplied MIME type — use safe generic to prevent XSS via blob URL
+    const blob = new Blob([receivedBuffer], { type: 'application/octet-stream' });
     receivedBuffer = null;
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url; a.download = receivedMetadata.name;
+    a.href = url;
+    a.download = receivedMetadata.name; // already sanitized at intake (Fix #1)
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 100);
     document.getElementById('receivedFileName').textContent = receivedMetadata.name;
@@ -427,9 +464,15 @@ window.addEventListener('load', () => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
     const exp = params.get('exp');
-    if (code) {
+    // Fix #4: validate code is exactly 8 chars from our allowed alphabet, and
+    // exp is a finite near-future timestamp (within 1 hour) before trusting it
+    if (code && /^[A-Z2-9]{8}$/.test(code.toUpperCase())) {
         document.getElementById('receiverCode').value = code.toUpperCase();
         switchTab('receive');
-        if (exp) startReceiverCountdown(parseInt(exp));
+        const expNum = parseInt(exp, 10);
+        const now = Date.now();
+        if (Number.isFinite(expNum) && expNum > now && expNum < now + 3_600_000) {
+            startReceiverCountdown(expNum);
+        }
     }
 });
