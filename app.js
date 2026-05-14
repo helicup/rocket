@@ -1,18 +1,18 @@
 // 🌐 i18n Configuration
 const i18n = {
     th: {
-        pageTitle: "Rocket! — P2P File Transfer", headerTitle: "🚀 Rocket!", headerSubtitle: "รับ-ส่งไฟล์แบบ Peer-to-Peer",
-        badgeDirect: "⚡ ตรง", badgeP2P: "📲 P2P", badgeNoServer: "🌐 ไม่ผ่านเซิร์ฟเวอร์", badgeEncrypted: "🔐 เข้ารหัส",
+        pageTitle: "Rocket! — P2P File Transfer", headerTitle: "🚀 Rocket!", headerSubtitle: "รับ-ส่งไฟล์แบบ แบบตัวต่อตัว",
+        badgeDirect: "⚡ โดยตรง", badgeP2P: "📲 ให้กันเอง", badgeNoServer: "🌐 ไม่ผ่านเซิร์ฟเวอร์", badgeEncrypted: "🔐 เข้ารหัส",
         tabSend: "📤 ส่งไฟล์", tabReceive: "📥 รับไฟล์", dropzoneText: "คลิกหรือลากไฟล์มาวางที่นี่ รองรับไฟล์ทุกประเภท",
-        generateBtn: "สร้างรหัสรับ-ส่งไฟล์", scanOrEnter: "สแกน QR Code หรือป้อนรหัส", copyCode: "คัดลอก", copyLink: "🔗 คัดลอกลิงก์",
+        generateBtn: "สร้างรหัส รับ-ส่งไฟล์", scanOrEnter: "สแกน QR Code หรือป้อนรหัส", copyCode: "คัดลอก", copyLink: "🔗 คัดลอกลิงก์",
         expiryPrefix: "รหัสหมดอายุใน", statusConnecting: "กำลังเชื่อมต่อ...", statusReady: "พร้อมแล้ว — รอผู้รับเชื่อมต่อ...",
         statusConnected: "เชื่อมต่อสำเร็จ! กำลังส่งไฟล์...", statusClosed: "การเชื่อมต่อสิ้นสุดลง", statusError: "เกิดข้อผิดพลาด",
         statusExpired: "รหัสหมดอายุแล้ว — กรุณาสร้างใหม่", statusRejected: "ปฏิเสธการเชื่อมต่อ — รอผู้รับใหม่...",
-        fileSent: "ส่งไฟล์สำเร็จ!", fileSentDesc: "ไฟล์ของคุณถูกส่งแบบ peer-to-peer ผ่าน WebRTC", sendAnother: "ส่งไฟล์อื่น",
+        fileSent: "ส่งไฟล์สำเร็จ!", fileSentDesc: "ไฟล์ของคุณ ถูกส่งแบบตัวต่อตัว ผ่านช่องทาง WebRTC", sendAnother: "ส่งไฟล์อื่น",
         enterCode: "XXXXXXXX", connectBtn: "🔗 เชื่อมต่อและรับไฟล์", statusConnectingReceive: "กำลังเชื่อมต่อ...",
         fileReceived: "รับไฟล์สำเร็จ!", downloading: "กำลังดาวน์โหลดอัตโนมัติ...", receiveAnother: "รับไฟล์อื่น",
-        footerDesc: "🚀 ไฟล์ถูกส่งตรง peer-to-peer โดยไม่ผ่าน server กลาง และมีการเข้ารหัสความปลอดภัย",
-        modalTitle: "มีผู้ขอรับไฟล์", modalPeerIdLabel: "PEER ID", modalFileLabel: "ไฟล์", modalReject: "✕ ปฏิเสธ", modalAccept: "✓ ส่งไฟล์",
+        footerDesc: "🚀 ไฟล์ถูกส่งตรงแบบตัวต่อตัว โดยไม่ผ่านตัวกลาง และมีการเข้ารหัสความปลอดภัย",
+        modalTitle: "มีผู้ขอรับไฟล์", modalPeerIdLabel: "PEER ID", modalFileLabel: "ไฟล์", modalReject: "✕ ปฏิเสธ", modalAccept: "✓ อนุญาต",
         toastCopiedCode: "คัดลอก Code แล้ว: ", toastCopiedLink: "คัดลอกลิงก์สำเร็จ!", toastCodeLength: "กรุณาใส่ code 8 ตัวอักษร",
         errLargeFile: "ไฟล์ใหญ่เกินไปสำหรับ browser (ขีดจำกัด 2GB)", errMemory: "ไฟล์ใหญ่เกินไปสำหรับ RAM ของ browser",
         langBtnTH: "🇹🇭 ไทย", langBtnEN: "🇬🇧 English"
@@ -28,8 +28,8 @@ const i18n = {
         fileSent: "File sent successfully!", fileSentDesc: "Your file was sent peer-to-peer via WebRTC", sendAnother: "Send another file",
         enterCode: "XXXXXXXX", connectBtn: "🔗 Connect & Receive File", statusConnectingReceive: "Connecting...",
         fileReceived: "File received!", downloading: "Downloading automatically...", receiveAnother: "Receive another file",
-        footerDesc: "🚀 Files are sent peer-to-peer without a central server and are encrypted.",
-        modalTitle: "Incoming File Request", modalPeerIdLabel: "PEER ID", modalFileLabel: "FILE", modalReject: "✕ Reject", modalAccept: "✓ Send",
+        footerDesc: "🚀 File was sent peer-to-peer without a central server and was encrypted.",
+        modalTitle: "Incoming File Request", modalPeerIdLabel: "PEER ID", modalFileLabel: "FILE", modalReject: "✕ Reject", modalAccept: "✓ Accept",
         toastCopiedCode: "Code copied: ", toastCopiedLink: "Link copied successfully!", toastCodeLength: "Please enter an 8-character code",
         errLargeFile: "File too large for browser (limit 2GB)", errMemory: "File too large for browser RAM",
         langBtnTH: "🇹🇭 Thai", langBtnEN: "🇬🇧 EN"
@@ -54,9 +54,9 @@ function setLanguage(lang) {
         if (i18n[lang][key]) el.placeholder = i18n[lang][key];
     });
     
-    // ✅ อัปเดตปุ่มสลับภาษาให้แสดง "ภาษาปลายทาง" เสมอ
+    // Show flag of the OTHER language (the one you'd switch TO)
     const btn = document.getElementById('langToggle');
-    if (btn) btn.textContent = lang === 'th' ? i18n[lang].langBtnEN : i18n[lang].langBtnTH;
+    if (btn) btn.textContent = lang === 'th' ? '🇬🇧' : '🇹🇭';
 }
 
 // 💾 File Size Limit

@@ -13,7 +13,7 @@
     <div class="container">
         <header>
             <h1 data-i18n="headerTitle">🚀 Rocket!</h1>
-            <p class="subtitle" data-i18n="headerSubtitle">รับ-ส่งไฟล์แบบ Peer-to-Peer</p>
+            <p class="subtitle" data-i18n="headerSubtitle">รับ-ส่งไฟล์ แบบตัวต่อตัว</p>
             <div class="badges">
                 <span class="badge" data-i18n="badgeDirect">⚡ DIRECT</span>
                 <span class="badge" data-i18n="badgeP2P">📲 P2P</span>
@@ -21,7 +21,7 @@
                 <span class="badge" data-i18n="badgeEncrypted">🔐 ENCRYPTED</span>
             </div>
             <!-- ✅ ปุ่มจะแสดงชื่อ/ธง ของ "ภาษาที่จะเปลี่ยนไป" อัตโนมัติ -->
-            <button id="langToggle" class="btn-lang">🇬🇧 English</button>
+            <button id="langToggle" class="btn-lang">🇬🇧</button>
         </header>
 
         <div class="tabs">
@@ -46,7 +46,7 @@
                         </div>
                         <button class="btn-remove" onclick="removeFile()">✕</button>
                     </div>
-                    <button id="generateBtn" class="btn-primary" disabled onclick="generateCode()" data-i18n="generateBtn">สร้างรหัสรับ-ส่งไฟล์</button>
+                    <button id="generateBtn" class="btn-primary" disabled onclick="generateCode()" data-i18n="generateBtn">สร้างรหัส รับ-ส่งไฟล์</button>
                 </div>
             </div>
 
@@ -108,14 +108,13 @@
                     <div class="success-icon">🎉</div>
                     <h3 data-i18n="fileReceived">รับไฟล์สำเร็จ!</h3>
                     <p id="receivedFileName"></p>
-                    <p data-i18n="downloading">กำลังดาวน์โหลดอัตโนมัติ...</p>
                     <button class="btn-secondary" onclick="resetReceive()" data-i18n="receiveAnother">รับไฟล์อื่น</button>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p data-i18n="footerDesc">🚀 ไฟล์ถูกส่งตรง peer-to-peer โดยไม่ผ่าน server กลาง และมีการเข้ารหัสความปลอดภัย</p>
+            <p data-i18n="footerDesc">🚀 ไฟล์ถูกส่งตรงแบบตัวต่อตัว โดยไม่ผ่านตัวกลาง และมีการเข้ารหัสความปลอดภัย</p>
             <p class="credit">Inspired by Beam P2P 🤖 Powered by Qwen, Claude, GPT & Gemini</p>
         </footer>
     </div>
@@ -137,7 +136,7 @@
             </div>
             <div class="modal-actions">
                 <button class="btn-modal-reject" onclick="modalReject()" data-i18n="modalReject">✕ ปฏิเสธ</button>
-                <button class="btn-modal-accept" onclick="modalAccept()" data-i18n="modalAccept">✓ ส่งไฟล์</button>
+                <button class="btn-modal-accept" onclick="modalAccept()" data-i18n="modalAccept">✓ อนุญาต</button>
             </div>
         </div>
     </div>
