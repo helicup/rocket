@@ -202,10 +202,18 @@ function initializePeer(id) {
 
 function handleConnection(connection) {
     conn = connection;
-    conn.on('open', () => { updateSendStatus(t('statusConnected'), 'connected'); sendFile(); });
     conn.on('data', (data) => { if (data.type === 'progress') updateSendProgress(data.progress); });
     conn.on('close', () => updateSendStatus(t('statusClosed'), 'closed'));
     conn.on('error', (err) => updateSendStatus(t('statusError'), 'error'));
+
+    // The 'open' event may have already fired by the time the modal await resolves.
+    // Check the current state directly and start immediately if already open.
+    if (conn.open) {
+        updateSendStatus(t('statusConnected'), 'connected');
+        sendFile();
+    } else {
+        conn.on('open', () => { updateSendStatus(t('statusConnected'), 'connected'); sendFile(); });
+    }
 }
 
 // ─── Send file w/ Backpressure ───────────────────────────────────────────────
