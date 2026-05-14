@@ -54,9 +54,14 @@ function setLanguage(lang) {
         if (i18n[lang][key]) el.placeholder = i18n[lang][key];
     });
     
-    // Show flag of the OTHER language (the one you'd switch TO)
-    const btn = document.getElementById('langToggle');
-    if (btn) btn.textContent = lang === 'th' ? '🇬🇧' : '🇹🇭';
+    // Show circle flag of the OTHER language (the one you'd switch TO)
+    const flagImg = document.getElementById('langFlagImg');
+    if (flagImg) {
+        flagImg.src = lang === 'th'
+            ? 'https://hatscripts.github.io/circle-flags/flags/gb.svg'
+            : 'https://hatscripts.github.io/circle-flags/flags/th.svg';
+        flagImg.alt = lang === 'th' ? 'EN' : 'TH';
+    }
 }
 
 // 💾 File Size Limit
